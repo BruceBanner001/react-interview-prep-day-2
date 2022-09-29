@@ -1,76 +1,169 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Day 2</title>
     <style>
-        body{
+        body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             padding-left: 10%;
             padding-right: 10%;
         }
-        h2{
+
+        h2 {
             color: coral;
         }
-        p, li{
+
+        p,
+        li {
             font-size: larger;
         }
-        h3{
+
+        h3 {
             color: lightcoral;
+        }
+        code{
+            font-size: larger;
+            color: royalblue;
         }
     </style>
 </head>
+
 <body>
     <h1>Day 2</h1>
     <div className='main'>
         <h2>1:What is the Difference between react and react native? Which one is library or framework?</h2>
         <p>
-            <h3>React JS</h3>
-            <ul className='items'>
-                <li>React JS is javascript library used for developing web applications.</li>
-                <li>React JS initial relaese was in 2013 by Facebook.</li>
-                <li>In React JS,the virtual DOM renders the browser code.</li>
-            </ul>
-            <h3>React Native</h3>
-            <ul className='items'>
-                <li>React Native is the React js based framework,used for developing Mobile applications.</li>
-                <li>React Native initial Release was in 2015 by Facebook.</li>
-                <li>In this,React natives uses its API to render code for mobile applications.</li>
-            </ul>
+        <h3>React JS</h3>
+        <ul className='items'>
+            <li>React JS is javascript library used for developing web applications.</li>
+            <li>React JS initial relaese was in 2013 by Facebook.</li>
+            <li>In React JS,the virtual DOM renders the browser code.</li>
+        </ul>
+        <h3>React Native</h3>
+        <ul className='items'>
+            <li>React Native is the React js based framework,used for developing Mobile applications.</li>
+            <li>React Native initial Release was in 2015 by Facebook.</li>
+            <li>In this,React natives uses its API to render code for mobile applications.</li>
+        </ul>
         </p>
         <hr>
         <h2>2:What is the package name you are using for routing?</h2>
         <p>Package name: <code>react-router-dom</code></p>
         <hr>
         <h2>3:Routing Implementation.</h2>
-        <!-- <p>For Implementation refer src folder.</p> -->
+        <pre>
+            <code>
+                //Home.jsx
+
+                import React from "react";
+
+                const Home = () =&gt; {
+                    return (
+                        &ltdiv className="landingPage"&gt;Home&lt/div&gt;
+                    );
+                }
+
+                export default Home;
+
+                //App.js
+
+                import React from 'react';
+                import Students from './Components/Student';
+                import './Components/MyNavbar.css';
+                import Home from './Components/Home';
+                import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+                function App() {
+                    return (
+                        &ltdiv className="App"&gt;
+                        &ltBrowserRouter&gt;
+                            &ltNavbar /&gt;
+                            &ltRoutes&gt;
+                            &ltRoute path="/home" element={&ltHome /&gt;} /&gt;
+                            &lt/Routes&gt;
+                        &lt/BrowserRouter&gt;
+                        &lt/div&gt;
+                    );
+                }
+                
+                export default App;
+            </code>
+        </pre>
         <hr>
         <h2>4:How do you pass data from parent to child?</h2>
-        <!-- <p>For Implementation refer src folder.</p> -->
+        <pre>
+            <code>
+                import React from 'react';
+
+                class Parent extends React.Component{
+                    constructor(props){
+                        super(props);
+                        this.state = {
+                            data: 'Data from parent'
+                        }
+                    }
+
+                    render(){
+                        const {data} = this.state;
+                        return(
+                            &lt;div&gt;
+                                &lt;Child dataParentToChild = {data}/&gt;
+                            &lt;/div&gt;
+                        )
+                    }
+                }
+
+                class Child extends React.Component{
+                    constructor(props){
+                        super(props);
+                        this.state = {
+                            data: this.props.dataParentToChild
+                        }
+                    }
+
+                    render(){
+                        const {data} = this.state;
+                        return(
+                            &lt;div&gt;
+                                {data}
+                            &lt;/div&gt;
+                        )
+                    }
+                }
+
+                export default Parent;
+            </code>
+        </pre>
         <hr>
         <h2>5:What is lazy loading in react?</h2>
-        <p>lazy loading means that a component or a part of code must get loaded when it is required. It is also referred to as code splitting and data fetching . Talking about React specifically, it bundles the complete code and deploys all of it at the same time.</p>
-        <p>Example:An example of image lazy-loading can be found on the popular publishing platform Medium, which loads lightweight placeholder images at page load, and replaces them with lazily-loaded images as they're scrolled into the viewport.</p>
+        <p>lazy loading means that a component or a part of code must get loaded when it is required. It is also
+            referred to as code splitting and data fetching . Talking about React specifically, it bundles the complete
+            code and deploys all of it at the same time.</p>
+        <p>Example:An example of image lazy-loading can be found on the popular publishing platform Medium, which loads
+            lightweight placeholder images at page load, and replaces them with lazily-loaded images as they're scrolled
+            into the viewport.</p>
         <hr>
         <h2>6:Difference b/w Stateful and stateless Component?</h2>
         <p>
-            <h3>Stateless Component</h3>
-            <ul>
-                <li>A stateless component is independent of its state.</li>
-                <li>A stateless component renders the props.</li>
-                <li>In stateless component,props are displayed like props.name</li>
-                <li>It renders the output depending upon the props value.</li>
-                <li>A functional components are always a stateless component.</li>
-            </ul>
-            <h3>Stateful components</h3>
-            <ul className='items'>
-                <li>A statelful component is dependent of its state.</li>
-                <li>A stateful component can renders both states & props.</li>
-                <li>In stateful component,states & props are displayed like this.props.name</li>
-                <li>It renders the output depending upon the state value.</li>
-                <li>A class components are always a stateful component.</li>  
-            </ul>
+        <h3>Stateless Component</h3>
+        <ul>
+            <li>A stateless component is independent of its state.</li>
+            <li>A stateless component renders the props.</li>
+            <li>In stateless component,props are displayed like props.name</li>
+            <li>It renders the output depending upon the props value.</li>
+            <li>A functional components are always a stateless component.</li>
+        </ul>
+        <h3>Stateful components</h3>
+        <ul className='items'>
+            <li>A statelful component is dependent of its state.</li>
+            <li>A stateful component can renders both states & props.</li>
+            <li>In stateful component,states & props are displayed like this.props.name</li>
+            <li>It renders the output depending upon the state value.</li>
+            <li>A class components are always a stateful component.</li>
+        </ul>
         </p>
         <hr>
         <h2>7:How do you switch one component to another & using Conditional Rendering?</h2>
@@ -82,4 +175,5 @@
 
     </div>
 </body>
+
 </html>
